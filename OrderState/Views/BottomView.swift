@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BottomView: View {
     
-    let status: Status
+    var status: Status
     
     var body: some View {
         HStack(alignment: .bottom) {
@@ -17,7 +17,7 @@ struct BottomView: View {
                 Text(status.rawValue)
                     .font(.title3)
                     .foregroundColor(.white)
-                Text(status.subTitle)
+                Text(status.subTitle + status.valueTitle)
                     .font(.caption2)
                     .foregroundColor(.white.opacity(0.7))
             }

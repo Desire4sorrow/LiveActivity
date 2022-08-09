@@ -13,6 +13,8 @@ struct ContentView: View {
     @State var currentId = ""
     @State var currentStatus: Status = .progress
     
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -47,6 +49,12 @@ struct ContentView: View {
         }
         .onLoad {
             addActivity()
+        }
+        .onReceive(timer) { input in
+            if currentStatus == .progress {
+                chargingSum += 1
+                chargingValue += 1
+            }
         }
     }
     

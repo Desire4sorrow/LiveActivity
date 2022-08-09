@@ -8,7 +8,11 @@
 import SwiftUI
 import ActivityKit
 
+var chargingValue = 0
+var chargingSum = 0
+
 struct ChargeAttributes: ActivityAttributes {
+    
     struct ContentState: Codable, Hashable {
         var status: Status = .progress
     }
@@ -35,9 +39,18 @@ enum Status: String, Codable, CaseIterable, Equatable {
         case .waiting:
             return "Нажмите, чтобы перейти в приложение."
         case .progress:
-            return "Зарядная сессия в процессе. Заряжено 4 кВт/ч. Сумма 100 р"
+            return "Зарядная сессия в процессе."
         case .needPay:
             return "Зарядка завершена. Для завершения оплатите зарядку."
+        }
+    }
+    
+    var valueTitle: String {
+        switch self {
+        case .progress:
+            return "Заряжено кВт/ч \(chargingValue), Сумма \(chargingSum) p"
+        default:
+            return ""
         }
     }
 }
